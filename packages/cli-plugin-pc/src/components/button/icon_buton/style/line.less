@@ -1,0 +1,49 @@
+/* 线框类 */
+
+// 1. icon+文字 蓝线框、透明背景
+.button-style_normal-line {
+  width: 120px;
+  height: 40px;
+  color: @color_blue2;
+  border: 1px solid @color_blue2;
+}
+.button-style_normal-line:hover {
+  color: @color_blue1;
+  border: 1px solid @color_blue1;
+}
+.button-style_normal-line:active {
+  color: @color_blue2;
+  border: 1px solid @color_blue2;
+}
+.button-style_normal-line--disabled {
+  color: @color_gray3 !important;
+  border: 1px solid @color_black8 !important;
+}
+
+// 2. icon（文字可选） 灰色边框=>蓝背景
+.button-style_line-gray {
+  width: 120px;
+  height: 40px;
+  color: @color_white6;
+  border: 1px solid @color_white6;
+}
+.button-style_line-gray:hover {
+  color: @color_blue1;
+  border: 1px solid @color_blue1;
+}
+.button-style_line-gray:active {
+  color: @color_blue2;
+  border: 1px solid @color_blue2;
+}
+
+.button-style_info {
+  width: 94px;
+  height: 32px;
+  color: @color_gray13;
+  border: 1px solid @color_black11;
+  background-color: @color_black13;
+}
+.button-style_info:active {
+  border: 1px solid @color_gray15;
+  background-color: @color_black4;
+}
