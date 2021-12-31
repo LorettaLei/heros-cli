@@ -1,32 +1,28 @@
-const { exec } = require('child_process');
+const { exec,execSync } = require('child_process');
 const { getPCPkgs, getH5Pkgs } = require('../config');
+const path = require('path')
+const ora = require('ora')
 
 exports.run = async (name, preset, pkgManager) => {
-    console.log('install start... ' + name + ' ' + preset + ' ' + pkgManager);
-
+    const spinner = ora('Loading start').start();
     const pkgs = getPkg(preset);
 
-    // await exec(`cd ${name}`);
-
     const pkgexec = pkgManager === 'yarn' ? 'yarn add' : 'npm install';
-
+    spinner.start();
     Object.keys(pkgs.dependencies).forEach(async ele => {
-        console.log(`${pkgexec} ${ele}`);
-        await exec(`${pkgexec} ${ele}`, {
-            cwd: `/${name}`
+        await execSync(`${pkgexec} ${ele}@${pkgs.dependencies[ele]}`, {
+            cwd: path.join(process.cwd(), name)
         });
     })
 
     Object.keys(pkgs.devDependencies).forEach(async ele => {
-        console.log(`${pkgexec} -D ${ele}`);
-        await exec(`${pkgexec} -D ${ele}`, {
-            cwd: name
+        await execSync(`${pkgexec} -D ${ele}@${pkgs.devDependencies[ele]}`, {
+            cwd: path.join(process.cwd(), name)
         });
     })
-
-    // await exec(`cd ..`);
     
-    console.log('install end... ');
+    spinner.stop();
+    
     return
 }
 
