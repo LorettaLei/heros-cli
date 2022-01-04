@@ -2,7 +2,7 @@
 const px2rem = require('postcss-pxtorem')
 
 module.exports = {
-  publicPath: '/community/',
+  publicPath: '/',
   devServer: {
     proxy: {
       '': {

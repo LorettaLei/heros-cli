@@ -82,8 +82,8 @@ exports.getH5Pkgs = () => {
           "swiper": "^6.8.4",
           "vconsole": "^3.9.1",
           "vue": "^3.0.0",
-          "vue-router": "^4.0.0-0",
-          "vuex": "^4.0.0-0"
+          "vue-router": "^4.0.12",
+          "vuex": "^4.0.2"
         },
         "devDependencies": {
           "@typescript-eslint/eslint-plugin": "^4.18.0",

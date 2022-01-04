@@ -1,8 +1,9 @@
 {
     "name": "heros-cli",
-    "version": "2.0.0-beta.2",
+    "version": "2.0.1",
     "description": "hero project cli",
     "author": "loretta_lei",
+    "license": "ISC",
     "bin": {
         "heros": "index.js"
     },
