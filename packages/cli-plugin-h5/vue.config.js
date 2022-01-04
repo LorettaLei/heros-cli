@@ -33,11 +33,6 @@ module.exports = {
             test: /[\\/]node_modules[\\/]/,
             priority: -10
           },
-          swiper: {
-            name: 'swiper',
-            test: /[\\/]node_modules[\\/]swiper[\\/]/,
-            priority: 21
-          },
           vconsole: {
             name: 'vconsole',
             test: /[\\/]node_modules[\\/]vconsole[\\/]/,

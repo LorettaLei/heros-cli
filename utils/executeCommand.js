@@ -5,10 +5,11 @@ const ora = require('ora')
 
 exports.run = async (name, preset, pkgManager) => {
     const spinner = ora('Loading start').start();
+    spinner.color = 'yellow'
     // const pkgs = getPkg(preset);
 
     const pkgexec = pkgManager === 'yarn' ? 'yarn' : 'npm install';
-    // spinner.start();
+    spinner.start();
     // Object.keys(pkgs.dependencies).forEach(async ele => {
     //     await execSync(`${pkgexec} ${ele}@${pkgs.dependencies[ele]}`, {
     //         cwd: path.join(process.cwd(), name)
@@ -23,7 +24,7 @@ exports.run = async (name, preset, pkgManager) => {
     await execSync(`${pkgexec}`, {
         cwd: path.join(process.cwd(), name)
     });
-    
+
     spinner.stop();
     
     return
