@@ -1,35 +1,41 @@
-const { execSync } = require('child_process');
-// const { getPCPkgs, getH5Pkgs } = require('../config');
+const { exec } = require('child_process');
 const path = require('path')
 const ora = require('ora')
 
 exports.run = async (name, preset, pkgManager) => {
+    console.clear()
     const spinner = ora('Loading start').start();
-    spinner.color = 'yellow'
-    // const pkgs = getPkg(preset);
+    spinner.color = 'blue'
 
     const pkgexec = pkgManager === 'yarn' ? 'yarn' : 'npm install';
-    spinner.start();
-    // Object.keys(pkgs.dependencies).forEach(async ele => {
-    //     await execSync(`${pkgexec} ${ele}@${pkgs.dependencies[ele]}`, {
-    //         cwd: path.join(process.cwd(), name)
-    //     });
-    // })
 
-    // Object.keys(pkgs.devDependencies).forEach(async ele => {
-    //     await execSync(`${pkgexec} -D ${ele}@${pkgs.devDependencies[ele]}`, {
-    //         cwd: path.join(process.cwd(), name)
-    //     });
-    // })
-    await execSync(`${pkgexec}`, {
-        cwd: path.join(process.cwd(), name)
+    spinner.start();
+
+    process.on('SIGINT', function () {
+        console.log(`
+        安装进程中断
+        执行以下命令完成安装并启动项目:
+        `);
+        console.log(`
+        cd ${name}
+        ${pkgManager}${pkgManager==='npm'?' install':''}
+        ${pkgManager} ${pkgManager==='npm'?'run ':''}${preset==='pc'?'dev':'serve'}`);
+        process.exit();
     });
 
-    spinner.stop();
-    
-    return
-}
+    exec(`${pkgexec}`, {
+        cwd: path.join(process.cwd(), name)
+    }, function(error, stdout, stderr){
+        if(error){
+            console.log(error)
+        }
+        spinner.stop();
 
-// function getPkg(preset){
-//     return preset === 'h5' ? getH5Pkgs() : getPCPkgs();
-// }
+        console.log(`
+        cd ${name}
+        ${pkgManager} ${pkgManager==='npm'?'run ':''}${preset==='pc'?'dev':'serve'}`);
+        
+        process.exit();
+    })
+
+}
